@@ -3,4 +3,18 @@
     Page Name
     <small>Welcome !</small>
   </h1>
+
+
 </div>
+
+<h1 *ngIf="isG('test')">测试显示的H1标签--P1</h1>
+<h1 *ngIf="isG(['test','abc'])">测试显示的H1标签--P2</h1>
+<h1 [acl]="{ ability: ['test','abc'], mode:'allOf' }">测试显示的H1标签--ACL</h1>
+
+<button (click)="addAcl()" nz-button>添加权限Test</button>
+
+<button (click)="removeAcl()" nz-button>移除权限Test</button>
+
+<button (click)="addAclAbc()" nz-button>添加权限ABC</button>
+
+<button (click)="removeAclAbc()" nz-button>移除权限ABC</button>

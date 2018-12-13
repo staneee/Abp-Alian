@@ -11,6 +11,7 @@ import { DelonFormModule } from '@delon/form';
 // #region third libs
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CountdownModule } from 'ngx-countdown';
+import { PermissionCheckerService } from './permission-checker.service';
 const THIRDMODULES = [
   NgZorroAntdModule,
   CountdownModule
@@ -54,6 +55,9 @@ const DIRECTIVES = [];
     // your components
     ...COMPONENTS,
     ...DIRECTIVES
+  ],
+  providers:[
+    PermissionCheckerService
   ]
 })
 export class SharedModule { }

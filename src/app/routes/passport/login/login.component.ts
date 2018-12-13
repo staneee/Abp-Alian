@@ -39,8 +39,8 @@ export class UserLoginComponent implements OnDestroy {
     public http: _HttpClient,
   ) {
     this.form = fb.group({
-      userName: [null, [Validators.required, Validators.minLength(5)]],
-      password: [null, Validators.required],
+      userName: ['admin', [Validators.required, Validators.minLength(5)]],
+      password: ['ng-alain.com', Validators.required],
       mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
       captcha: [null, [Validators.required]],
       remember: [true],
