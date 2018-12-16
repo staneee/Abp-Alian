@@ -8,7 +8,7 @@ import { SettingsService } from '@delon/theme';
 export class HeaderComponent {
   searchToggleStatus: boolean;
 
-  constructor(public settings: SettingsService) {}
+  constructor(public settings: SettingsService) { }
 
   toggleCollapsedSidebar() {
     this.settings.setLayout('collapsed', !this.settings.layout.collapsed);

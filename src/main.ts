@@ -14,7 +14,8 @@ if (environment.production) {
 }
 
 const bootstrap = () => {
-  return platformBrowserDynamic().bootstrapModule(AppModule, {
+  return platformBrowserDynamic()
+  .bootstrapModule(AppModule, {
     defaultEncapsulation: ViewEncapsulation.Emulated,
     preserveWhitespaces: false,
   }).then((res) => {

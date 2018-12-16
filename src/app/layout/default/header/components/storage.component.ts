@@ -1,30 +1,37 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Injector } from '@angular/core';
 import { NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { AppComponentBase } from '@shared/component-base';
 
 @Component({
   selector: 'header-storage',
   template: `
-  <i nz-icon type="tool"></i>
-  清理本地缓存
+  <div (click)="_click()">
+    <i nz-icon type="tool"></i>
+    {{l('ClearAllLocalStorage')}}
+  </div>
   `,
   host: {
     '[class.d-block]': 'true',
   },
 })
-export class HeaderStorageComponent {
+export class HeaderStorageComponent extends AppComponentBase {
+
+  clicked: boolean = true;
+
   constructor(
-    private confirmServ: NzModalService,
-    private messageServ: NzMessageService,
-  ) {}
+    injector: Injector,
+  ) {
+    super(injector);
+  }
 
   @HostListener('click')
   _click() {
-    this.confirmServ.confirm({
-      nzTitle: 'Make sure clear all local storage?',
-      nzOnOk: () => {
+    this.message.confirm(this.l('MakeSureClearAllLocalStorage'), (res) => {
+      if (res) {
         localStorage.clear();
-        this.messageServ.success('Clear Finished!');
-      },
+        this.message.success(this.l('ClearFinished'));
+      }
+
     });
   }
 }

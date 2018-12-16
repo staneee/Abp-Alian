@@ -1,94 +1,63 @@
-import { NgModule, LOCALE_ID, APP_INITIALIZER, Injector } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AppComponent } from '@app/app.component';
+import { LayoutModule } from '@app/layout/layout.module';
+import { HomeComponent } from '@app/home/home.component';
+import { SharedModule } from '@shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// #region default language
-// 参考：https://ng-alain.com/docs/i18n
-import { default as ngLang } from '@angular/common/locales/zh';
-import { NZ_I18N, zh_CN as zorroLang } from 'ng-zorro-antd';
-import { DELON_LOCALE, zh_CN as delonLang } from '@delon/theme';
-const LANG = {
-  abbr: 'zh',
-  ng: ngLang,
-  zorro: zorroLang,
-  delon: delonLang,
-};
-// register angular
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(LANG.ng, LANG.abbr);
-const LANG_PROVIDES = [
-  { provide: LOCALE_ID, useValue: LANG.abbr },
-  { provide: NZ_I18N, useValue: LANG.zorro },
-  { provide: DELON_LOCALE, useValue: LANG.delon },
-];
-// #endregion
-
-// #region JSON Schema form (using @delon/form)
-import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
-const FORM_MODULES = [ JsonSchemaModule ];
-// #endregion
-
-
-// #region Http Interceptors
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SimpleInterceptor } from '@delon/auth';
-import { DefaultInterceptor } from '@core/net/default.interceptor';
-const INTERCEPTOR_PROVIDES = [
-  { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true},
-  { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true}
-];
-// #endregion
-
-// #region global third module
-const GLOBAL_THIRD_MODULES = [
-];
-// #endregion
-
-// #region Startup Service
-import { StartupService } from '@core/startup/startup.service';
-export function StartupServiceFactory(startupService: StartupService): Function {
-  return () => startupService.load();
-}
-const APPINIT_PROVIDES = [
-  StartupService,
-  {
-    provide: APP_INITIALIZER,
-    useFactory: StartupServiceFactory,
-    deps: [StartupService],
-    multi: true
-  }
-];
-// #endregion
-
-import { DelonModule } from './delon.module';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
-import { AppComponent } from './app.component';
-import { RoutesModule } from './routes/routes.module';
-import { LayoutModule } from './layout/layout.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { AboutComponent } from '@app/about/about.component';
+import { TenantsComponent } from '@app/tenants/tenants.component';
+import { UsersComponent } from '@app/users/users.component';
+import { RolesComponent } from '@app/roles/roles.component';
+import { CreateTenantComponent } from '@app/tenants/create-tenant/create-tenant.component';
+import { EditTenantComponent } from '@app/tenants/edit-tenant/edit-tenant.component';
+import { CreateRoleComponent } from '@app/roles/create-role/create-role.component';
+import { EditRoleComponent } from '@app/roles/edit-role/edit-role.component';
+import { CreateUserComponent } from '@app/users/create-user/create-user.component';
+import { EditUserComponent } from '@app/users/edit-user/edit-user.component';
+import { MenuService } from '@delon/theme';
+import { AdvertisingComponent } from './advertising/advertising.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
+    CommonModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    DelonModule.forRoot(),
-    CoreModule,
-    SharedModule,
+    AppRoutingModule,
     LayoutModule,
-    RoutesModule,
-    ...FORM_MODULES,
-    ...GLOBAL_THIRD_MODULES
+    SharedModule,
   ],
-  providers: [
-    ...LANG_PROVIDES,
-    ...INTERCEPTOR_PROVIDES,
-    ...APPINIT_PROVIDES
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    TenantsComponent,
+    UsersComponent,
+    RolesComponent,
+    CreateTenantComponent,
+    EditTenantComponent,
+    CreateRoleComponent,
+    EditRoleComponent,
+    CreateUserComponent,
+    EditUserComponent,
+    AdvertisingComponent,
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+    CreateTenantComponent,
+    EditTenantComponent,
+    CreateRoleComponent,
+    EditRoleComponent,
+    CreateUserComponent,
+    EditUserComponent,
+    AdvertisingComponent,
+  ],
+  // providers: [LocalizationService, MenuService],
 })
 export class AppModule { }

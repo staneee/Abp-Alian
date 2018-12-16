@@ -16,7 +16,7 @@ import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 
 
-import { DelonModule } from '../app/delon.module';
+import { DelonModule } from '../delon.module';
 
 const resetTestingModule = TestBed.resetTestingModule,
   preventAngularFromResetting = () =>
