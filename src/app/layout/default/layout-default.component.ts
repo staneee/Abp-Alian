@@ -22,7 +22,7 @@ import {
   import { NzMessageService, NzIconService } from 'ng-zorro-antd';
   import { Subscription } from 'rxjs';
   import { updateHostClass } from '@delon/util';
-  import { ScrollService, MenuService, SettingsService } from '@delon/theme';
+  import { ScrollService, SettingsService } from '@delon/theme';
   
   // #region icons
   
@@ -68,7 +68,6 @@ import {
   
   // #endregion
   import { AppComponentBase } from '@shared/component-base';
-  import { AppMenus } from '../../AppMenus';
   
   
   @Component({
@@ -89,7 +88,6 @@ import {
       iconSrv: NzIconService,
       router: Router,
       scroll: ScrollService,
-      public menuSrv: MenuService,
       public settings: SettingsService,
       private el: ElementRef,
       private renderer: Renderer2,
@@ -117,8 +115,7 @@ import {
           this.isFetching = false;
         }, 100);
       });
-  
-      this.menuSrv.add(AppMenus.Menus);
+      
     }
   
     get collapsed(): boolean {

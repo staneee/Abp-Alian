@@ -19,12 +19,12 @@ export class PermissionService {
             return true;
         }
         if (Array.isArray(permissionName)) {
-            return this.aclService.canAbility({
-                ability: permissionName,
+            return this.aclService.can({
+                role: permissionName,
                 mode: 'allOf'
             });
         } else {
-            return this.aclService.canAbility(permissionName);
+            return this.aclService.can(permissionName);
         }
     }
 
@@ -37,21 +37,19 @@ export class PermissionService {
             return;
         }
 
-
-
         if (Array.isArray(permissionName)) {
             for (let i = 0; i < permissionName.length; i++) {
                 let tmppermissionName = permissionName[i];
-                if (this.aclService.data.abilities.every(item => item === tmppermissionName)) {
+                if (this.aclService.data.abilities.find(item => item === tmppermissionName)) {
                     continue;
                 }
-                this.aclService.setAbility([tmppermissionName]);
+                this.aclService.attachRole([tmppermissionName]);
             }
         } else {
-            if (this.aclService.data.abilities.every(item => item === permissionName)) {
+            if (this.aclService.data.abilities.find(item => item === permissionName)) {
                 return;
             }
-            this.aclService.setAbility([permissionName]);
+            this.aclService.attachRole([permissionName]);
         }
     }
 
@@ -65,10 +63,10 @@ export class PermissionService {
         }
 
         if (Array.isArray(permissionName)) {
-            this.aclService.removeAbility(permissionName);
+            this.aclService.removeRole(permissionName);
         } else {
 
-            this.aclService.removeAbility([permissionName]);
+            this.aclService.removeRole([permissionName]);
         }
     }
 
@@ -86,6 +84,7 @@ export class PermissionService {
   * @param auth 
   */
     extend(auth) {
+
         let permissions: string[] = [];
         for (let permission in auth.grantedPermissions) {
             permissions.push(permission);

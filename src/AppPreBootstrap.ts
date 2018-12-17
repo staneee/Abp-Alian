@@ -11,8 +11,9 @@ import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
 import { PermissionService } from '@shared/auth/permission.service';
-import { ALAIN_I18N_TOKEN } from '@delon/theme';
+import { ALAIN_I18N_TOKEN, MenuService } from '@delon/theme';
 import { LocalizationService } from '@shared/i18n/localization.service';
+import { AppMenus } from '@shared/AppMenus';
 
 export class AppPreBootstrap {
     static run(injector: Injector, callback: () => void): void {
@@ -73,12 +74,17 @@ export class AppPreBootstrap {
 
             _.merge(abp, result);
 
+            // debugger
+
             // 权限授予
             const permissionService = injector.get(PermissionService);
             permissionService.extend(abp.auth);
             // 本地化
             const localization = injector.get<LocalizationService>(ALAIN_I18N_TOKEN);
             localization.extend(abp.localization);
+            // 刷新菜单
+            const menuService = injector.get(MenuService);
+            menuService.add(AppMenus.Menus);
 
             abp.clock.provider = this.getCurrentClockProvider(result.clock.provider);
 
