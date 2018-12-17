@@ -27,15 +27,11 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
     }
 
     showChangeModal(): void {
-        this.modalHelper
-            .open(
-                TenantChangeModalComponent,
-                { tenancyName: this.tenancyName },
-                'md',
-                {
-                    nzMask: true,
-                },
-        )
-            .subscribe(() => { });
+        this.modalHelper.open(TenantChangeModalComponent, { tenancyName: this.tenancyName }, 'md')
+            .subscribe((res) => {
+                if (res) {
+                    window.location.reload();
+                }
+            });
     }
 }
