@@ -47,9 +47,9 @@ export class LocalizationService implements AlainI18NService {
      */
     formatString(str: string, args: any[]): string {
         let result: string;
-        for (var i = 1; i < arguments.length; i++) {
-            var placeHolder = '{' + (i - 1) + '}';
-            result = this.replaceAll(str, placeHolder, arguments[i]);
+        for (var i = 0; i < args.length; i++) {
+            var placeHolder = '{' + i + '}';
+            result = this.replaceAll(str, placeHolder, args[i]);
         }
         return result;
     }

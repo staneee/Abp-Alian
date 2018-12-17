@@ -97,6 +97,7 @@ import {
       iconSrv.addIcon(...ICONS);
       // scroll to top in change page
       router.events.subscribe(evt => {
+        
         if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
           this.isFetching = true;
         }

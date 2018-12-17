@@ -23,17 +23,15 @@ const THIRDMODULES = [
   CustomComponentModule,
 ];
 
-import { DelonABCModule, PageHeaderConfig } from '@delon/abc';
+import { DelonABCModule } from '@delon/abc';
 import { DelonFormModule } from '@delon/form';
-
-import { AlainThemeModule, ModalHelper } from '@delon/theme';
+import { AlainThemeModule } from '@delon/theme';
 
 // endregion
-
-import { EqualValidator } from './utils/validation/index';
 import { DelonChartModule } from '@delon/chart';
-import { PermissionService } from './auth/permission.service';
-const PIPES = [EqualValidator];
+import { DelonACLModule } from '@delon/acl';
+import { PermissionService } from './auth';
+
 
 @NgModule({
   imports: [
@@ -45,13 +43,15 @@ const PIPES = [EqualValidator];
 
     AlainThemeModule.forChild(),
     DelonABCModule,
-    // DelonACLModule,
+    DelonACLModule,
     DelonChartModule,
     DelonFormModule,
     // third libs
     ...THIRDMODULES,
   ],
-  declarations: [...PIPES],
+  declarations: [
+
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -59,18 +59,12 @@ const PIPES = [EqualValidator];
     RouterModule,
     AlainThemeModule,
     DelonABCModule,
-    // DelonACLModule,
+    DelonACLModule,
     DelonChartModule,
     DelonFormModule,
     // third libs
-    ...PIPES,
     ...THIRDMODULES,
-  ],
-  providers: [
-    ModalHelper,
-    PermissionService
-    // { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
-  ],
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
@@ -80,7 +74,8 @@ export class SharedModule {
         AppSessionService,
         AppUrlService,
         AppAuthService,
-        AppRouteGuard
+        AppRouteGuard,
+        PermissionService,
       ],
     };
   }
