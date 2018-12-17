@@ -18,7 +18,7 @@ import { LOCALE_ID } from '@angular/core';
 import { RootRoutingModule } from 'root-routing.module';
 import { SharedModule } from '@shared/shared.module';
 
-import { TitleService } from '@delon/theme';
+import { TitleService, ALAIN_I18N_TOKEN } from '@delon/theme';
 
 
 import { DelonModule } from './delon.module';
@@ -27,6 +27,7 @@ import { ICONS } from './style-icons';
 
 import { AbpModule } from '@abp/abp.module';
 import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
+import { LocalizationService } from '@shared/i18n/localization.service';
 
 
 export function appInitializerFactory(injector: Injector) {
@@ -81,6 +82,11 @@ function getDocumentOrigin() {
     return document.location.origin;
 }
 
+const I18NSERVICE_PROVIDES = [
+    // { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false }
+    { provide: ALAIN_I18N_TOKEN, useClass: LocalizationService, multi: false }
+];
+
 
 @NgModule({
     imports: [
@@ -104,6 +110,7 @@ function getDocumentOrigin() {
         { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
         { provide: APP_INITIALIZER, useFactory: appInitializerFactory, deps: [Injector, PlatformLocation], multi: true },
         { provide: LOCALE_ID, useFactory: getCurrentLanguage, },
+        I18NSERVICE_PROVIDES,
     ],
     bootstrap: [RootComponent],
 })

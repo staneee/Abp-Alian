@@ -31,7 +31,9 @@ const SIDEBARCOMPONENTS=[
 
 
 @NgModule({
-  imports: [SharedModule],
+  imports: [
+    SharedModule
+  ],
   declarations: [
     ...COMPONENTS, 
     ...HEADERCOMPONENTS,

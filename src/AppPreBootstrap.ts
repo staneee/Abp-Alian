@@ -11,6 +11,8 @@ import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
 import { PermissionService } from '@shared/auth/permission.service';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
+import { LocalizationService } from '@shared/i18n/localization.service';
 
 export class AppPreBootstrap {
     static run(injector: Injector, callback: () => void): void {
@@ -19,7 +21,7 @@ export class AppPreBootstrap {
         console.log("由52ABP模板构建,详情请访问 https://www.52abp.com");
 
         AppPreBootstrap.getApplicationConfig(httpClient, () => {
-            AppPreBootstrap.getUserConfiguration(injector,httpClient, callback);
+            AppPreBootstrap.getUserConfiguration(injector, httpClient, callback);
         });
     }
 
@@ -74,6 +76,9 @@ export class AppPreBootstrap {
             // 权限授予
             const permissionService = injector.get(PermissionService);
             permissionService.extend(abp.auth);
+            // 本地化
+            const localization = injector.get<LocalizationService>(ALAIN_I18N_TOKEN);
+            localization.extend(abp.localization);
 
             abp.clock.provider = this.getCurrentClockProvider(result.clock.provider);
 
