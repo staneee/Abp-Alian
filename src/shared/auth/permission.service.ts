@@ -86,7 +86,6 @@ export class PermissionService {
   * @param auth 
   */
     extend(auth) {
-        debugger
         let permissions: string[] = [];
         for (let permission in auth.grantedPermissions) {
             permissions.push(permission);

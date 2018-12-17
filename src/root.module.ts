@@ -27,7 +27,7 @@ import { ICONS } from './style-icons';
 
 import { AbpModule } from '@abp/abp.module';
 import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
-import { PermissionService } from '@shared/auth/permission.service';
+
 
 export function appInitializerFactory(injector: Injector) {
 

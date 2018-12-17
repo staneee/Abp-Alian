@@ -19,7 +19,6 @@ export class AccountLanguagesComponent extends AppComponentBase
   }
 
   ngOnInit() {
-    debugger
     this.languages = _.filter(this.localization.languages, l => !l.isDisabled);
     this.currentLanguage = this.localization.currentLanguage;
   }
