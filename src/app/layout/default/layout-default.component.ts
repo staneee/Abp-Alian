@@ -22,7 +22,7 @@ import {
   import { NzMessageService, NzIconService } from 'ng-zorro-antd';
   import { Subscription } from 'rxjs';
   import { updateHostClass } from '@delon/util';
-  import { ScrollService, SettingsService } from '@delon/theme';
+  import { ScrollService, SettingsService, TitleService } from '@delon/theme';
   
   // #region icons
   
@@ -91,6 +91,7 @@ import {
       public settings: SettingsService,
       private el: ElementRef,
       private renderer: Renderer2,
+      private titleSrv: TitleService,
       @Inject(DOCUMENT) private doc: any,
     ) {
       super(injector);
