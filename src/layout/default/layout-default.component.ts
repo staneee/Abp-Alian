@@ -91,7 +91,6 @@ import {
       public settings: SettingsService,
       private el: ElementRef,
       private renderer: Renderer2,
-      private titleSrv: TitleService,
       @Inject(DOCUMENT) private doc: any,
     ) {
       super(injector);

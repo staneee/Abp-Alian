@@ -72,25 +72,15 @@ export class AppPreBootstrap {
         httpClient.get(url).subscribe((response: any) => {
             let result = response.result;
 
+            // 填充数据
             _.merge(abp, result);
 
-            // debugger
 
-            // 权限授予
-            const permissionService = injector.get(PermissionService);
-            permissionService.extend(abp.auth);
-            // 本地化
-            const localization = injector.get<LocalizationService>(ALAIN_I18N_TOKEN);
-            localization.extend(abp.localization);
-            // 刷新菜单
-            const menuService = injector.get(MenuService);
-            menuService.add(AppMenus.Menus);
-
+            // 时区
             abp.clock.provider = this.getCurrentClockProvider(result.clock.provider);
-
             moment.locale(abp.localization.currentLanguage.name);
-            (window as any).moment.locale(abp.localization.currentLanguage.name);
 
+            (window as any).moment.locale(abp.localization.currentLanguage.name);
             if (abp.clock.provider.supportsMultipleTimezone) {
                 moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
                 (window as any).moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
@@ -99,6 +89,18 @@ export class AppPreBootstrap {
 
             // 注册语言,NG-Zorro的DataPicker要使用
             registerLocaleData(zh);
+
+
+            // 权限
+            const permissionService = injector.get(PermissionService);
+            permissionService.extend(abp.auth);
+            // 本地化
+            const localization = injector.get<LocalizationService>(ALAIN_I18N_TOKEN);
+            localization.extend(abp.localization);
+            // 写入菜单
+            const menuService = injector.get(MenuService);
+            menuService.add(AppMenus.Menus);
+
 
             callback();
         });
