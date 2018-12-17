@@ -23,25 +23,6 @@ export class AppConsts {
 
   static readonly authorization = {
     encrptedAuthTokenName: 'enc_auth_token',
-  };
-  static maxProfilPictureMb = 1; // 个人头像上传最大MB
-
-  static l(key: string, ...args: any[]): string {
-    let localizedText = abp.localization.localize(
-      key,
-      AppConsts.localization.defaultLocalizationSourceName,
-    );
-
-    if (!localizedText) {
-      localizedText = key;
-    }
-
-    if (!args || !args.length) {
-      return localizedText;
-    }
-
-    args.unshift(localizedText);
-    return abp.utils.formatString.apply(this, args);
   }
 
   /**

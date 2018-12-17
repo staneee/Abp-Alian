@@ -11,8 +11,6 @@ import {
   ScrollService,
   _HttpClient,
 } from '@delon/theme';
-import { DelonAuthModule } from '@delon/auth';
-import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 
 
@@ -42,8 +40,7 @@ export const setUpTestBed = (moduleDef: TestModuleMetadata) => {
       moduleDef.imports.push(HttpClientModule);
       moduleDef.imports.push(DelonModule);
       moduleDef.imports.push(SharedModule);
-      // auth
-      moduleDef.imports.push(DelonAuthModule.forRoot());
+
 
       if (!moduleDef.providers) {
         moduleDef.providers = [];
