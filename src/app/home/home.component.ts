@@ -4,6 +4,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ACLService } from '@delon/acl';
+import { AdvertisingComponent } from '@app/advertising/advertising.component';
 // import { AdvertisingComponent } from '@app/advertising/advertising.component';
 
 @Component({
@@ -129,9 +130,9 @@ export class HomeComponent extends AppComponentBase implements OnInit {
   }
 
   showAdvertising() {
-    // this.modalHelper.open(AdvertisingComponent)
-    //   .subscribe(() => {
+    this.modalHelper.open(AdvertisingComponent)
+      .subscribe(() => {
 
-    //   });
+      });
   }
 }
