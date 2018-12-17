@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Injector, ViewChild } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/component-base/app-component-base';
 import { TenantChangeModalComponent } from './tenant-change-modal.component';

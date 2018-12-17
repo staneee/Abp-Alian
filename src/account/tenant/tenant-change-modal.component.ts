@@ -1,4 +1,4 @@
-﻿import {
+import {
   Component,
   OnInit,
   Injector,
@@ -10,6 +10,7 @@ import { IsTenantAvailableInput } from '@shared/service-proxies/service-proxies'
 import { AppTenantAvailabilityState } from '@shared/AppEnums';
 import { ModalComponentBase } from '@shared/component-base/modal-component-base';
 import { AppComponentBase } from '@shared/component-base/app-component-base';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tenant-change-modal',
@@ -51,9 +52,9 @@ export class TenantChangeModalComponent extends ModalComponentBase
 
     this._accountService
       .isTenantAvailable(input)
-      .finally(() => {
+      .pipe(finalize(() => {
         this.saving = false;
-      })
+      }))
       .subscribe(result => {
         switch (result.state) {
           case AppTenantAvailabilityState.Available:

@@ -18,7 +18,7 @@ export class AppConsts {
   };
 
   static readonly localization = {
-    defaultLocalizationSourceName: 'ABP402',
+    defaultLocalizationSourceName: 'YoyoCmsTemplate',
   };
 
   static readonly authorization = {

@@ -19,7 +19,7 @@ import { RootRoutingModule } from 'root-routing.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { TitleService } from '@delon/theme';
-import { AppModule } from '@app/app.module';
+
 
 import { DelonModule } from './delon.module';
 import { ICONS_AUTO } from './style-icons-auto';
@@ -96,7 +96,6 @@ function getDocumentOrigin() {
         NgZorroAntdModule,
         /** 必须导入 ng-zorro 才能导入此项 */
         SharedModule.forRoot(),
-        AppModule,
     ],
     declarations: [RootComponent],
     providers: [

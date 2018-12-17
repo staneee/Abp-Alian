@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
 import {
   SessionServiceProxy,
   UserLoginInfoDto,

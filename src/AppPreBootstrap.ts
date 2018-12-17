@@ -40,11 +40,7 @@ export class AppPreBootstrap {
             envName = 'dev';
         }
         let url = '/assets/appconfig.' + envName + '.json';
-        httpClient.get(url, {
-            headers: {
-                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie() + '',
-            }
-        }).subscribe((result: any) => {
+        httpClient.get(url).subscribe((result: any) => {
             AppConsts.appBaseUrl = window.location.protocol + '//' + window.location.host;
             AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl;
 
@@ -72,16 +68,8 @@ export class AppPreBootstrap {
         callback: () => void,
     ) {
         let url = AppConsts.remoteServiceBaseUrl + '/AbpUserConfiguration/GetAll';
-
-        let token = abp.auth.getToken() || '';
-        httpClient.get(url, {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                '.AspNetCore.Culture': abp.utils.getCookieValue('Abp.Localization.CultureName'),
-                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie() + '',
-            }
-        }).subscribe((result: any) => {
-            debugger
+        httpClient.get(url).subscribe((response: any) => {
+            let result = response.result;
 
             _.merge(abp, result);
 
