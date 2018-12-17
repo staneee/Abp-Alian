@@ -4,8 +4,7 @@ import { environment } from './environments/environment';
 import { hmrBootstrap } from './hmr';
 import { RootModule } from 'root.module';
 
-import { preloaderFinished } from '@delon/theme';
-preloaderFinished();
+
 
 if (environment.production) {
   enableProdMode();
@@ -13,19 +12,19 @@ if (environment.production) {
 
 const bootstrap = () => {
   return platformBrowserDynamic()
-  .bootstrapModule(RootModule, {
-    defaultEncapsulation: ViewEncapsulation.Emulated,
-    preserveWhitespaces: false,
-  }).then((res) => {
-    if ((<any>window).appBootstrap) {
-      (<any>window).appBootstrap();
-    }
-    return res;
-  });
+    .bootstrapModule(RootModule, {
+      defaultEncapsulation: ViewEncapsulation.Emulated,
+      preserveWhitespaces: false,
+    }).then((res) => {
+      if ((<any>window).appBootstrap) {
+        (<any>window).appBootstrap();
+      }
+      return res;
+    });
 };
 
 if (environment.hmr) {
-  if (module[ 'hot' ]) {
+  if (module['hot']) {
     hmrBootstrap(module, bootstrap);
   } else {
     console.error('HMR is not enabled for webpack-dev-server!');

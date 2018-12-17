@@ -5,6 +5,8 @@ import { NzModalService, NzNotificationService, NzMessageService, VERSION as VER
 import { TitleService, VERSION as VERSION_ALAIN } from '@delon/theme';
 import { MessageExtension } from '@shared/helpers/message.extension';
 
+import { preloaderFinished } from '@delon/theme';
+preloaderFinished();
 
 
 @Component({
