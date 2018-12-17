@@ -42,6 +42,7 @@ export class YoYoSidebarNavComponent implements OnInit, OnDestroy {
         public settings: SettingsService,
         public reuseTabService: ReuseTabService,
         private cd: ChangeDetectorRef,
+        private router: Router,
     ) {
         this.click(null);
     }

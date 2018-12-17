@@ -41,12 +41,6 @@ export class AppMenus {
             icon: { type: "icon", value: "info-circle" },
             link: "/app/about",
         },
-        {
-            text: "",
-            i18n: "Test",
-            icon: { type: "icon", value: "info-circle" },
-            link: "/app/abc",
-        },
     ];
     // old
     // static Menus = [

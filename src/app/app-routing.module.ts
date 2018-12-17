@@ -14,8 +14,8 @@ const routes: Routes = [
     path: '',
     component: LayoutDefaultComponent,
     canActivate: [AppRouteGuard],
-    canActivateChild: [AppRouteGuard],
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
         component: HomeComponent,
@@ -41,10 +41,7 @@ const routes: Routes = [
         component: AboutComponent,
         canActivate: [AppRouteGuard],
       },
-      {
-        path: '**',
-        redirectTo: 'home'
-      },
+
     ],
   },
 ];
