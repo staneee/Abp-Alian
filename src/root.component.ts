@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService, NzNotificationService, NzMessageService } from 'ng-zorro-antd';
-import { AppConsts } from '@shared/AppConsts';
+import { MessageExtension } from '@shared/helpers/message.extension';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +14,16 @@ export class RootComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // // 覆盖abp自带的通知和mssage
-    // AppConsts.overrideAbpMessageByMini(
+    // 覆盖abp自带的通知和mssage
+    // MessageExtension.overrideAbpMessageByMini(
     //   this._messageService,
     //   this._modalService,
     // );
-    // //  覆盖abp.message替换为ng-zorro的全局message
-    // //  AppConsts.overrideAbpMessageByNgModal(this._modalService); /// 覆盖abp.message替换为ng-zorro的模态框
 
-    // AppConsts.overrideAbpNotify(this._notifyService);
+    //  覆盖abp.message替换为ng-zorro的模态框
+    MessageExtension.overrideAbpMessageByNgModal(this._modalService);
+
+    //  覆盖abp.notify替换为ng-zorro的notify
+    MessageExtension.overrideAbpNotify(this._notifyService);
   }
 }

@@ -3,19 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run color-less && ng serve -o",
-    "build": "npm run color-less && ng build --prod --build-optimizer",
+    "start": "ng serve --host 0.0.0.0 --port 4201 -o",
+    "build": "ng build --prod --build-optimizer",
     "test": "ng test",
     "lint": "npm run lint:ts && npm run lint:style",
     "e2e": "ng e2e",
-    "analyze": "npm run color-less && ng build --prod --build-optimizer --stats-json",
+    "analyze": "ng build --prod --build-optimizer --stats-json",
     "test-coverage": "ng test --code-coverage --watch=false",
-    "color-less": "node scripts/color-less.js",
     "lint:ts": "tslint -p src/tsconfig.app.json -c tslint.json 'src/**/*.ts'",
     "lint:style": "stylelint \"{src}/**/*.less\" --syntax less",
     "lint-staged": "lint-staged",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "hmr": "ng serve -c=hmr"
+    "hmr": "ng serve --host 0.0.0.0 --port 4200 4201 --hmr -e=hmr"
+
   },
   "private": true,
   "dependencies": {

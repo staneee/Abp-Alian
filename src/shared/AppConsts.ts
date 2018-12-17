@@ -26,13 +26,6 @@ export class AppConsts {
   };
   static maxProfilPictureMb = 1; // 个人头像上传最大MB
 
-  // // 封装个建议的本地化方法
-  // static L(key: string): string {
-  //   return abp.localization.localize(
-  //     key,
-  //     AppConsts.localization.defaultLocalizationSourceName,
-  //   );
-  // }
   static l(key: string, ...args: any[]): string {
     let localizedText = abp.localization.localize(
       key,
