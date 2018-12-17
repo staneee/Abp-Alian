@@ -10,6 +10,7 @@ import zh from '@angular/common/locales/zh';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
+import { PermissionService } from '@shared/auth/permission.service';
 
 export class AppPreBootstrap {
     static run(injector: Injector, callback: () => void): void {
@@ -18,7 +19,7 @@ export class AppPreBootstrap {
         console.log("由52ABP模板构建,详情请访问 https://www.52abp.com");
 
         AppPreBootstrap.getApplicationConfig(httpClient, () => {
-            AppPreBootstrap.getUserConfiguration(httpClient, callback);
+            AppPreBootstrap.getUserConfiguration(injector,httpClient, callback);
         });
     }
 
@@ -49,9 +50,8 @@ export class AppPreBootstrap {
         })
     }
 
-    private static getCurrentClockProvider(
-        currentProviderName: string,
-    ): abp.timing.IClockProvider {
+    private static getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {
+
         if (currentProviderName === 'unspecifiedClockProvider') {
             return abp.timing.unspecifiedClockProvider;
         }
@@ -63,15 +63,17 @@ export class AppPreBootstrap {
         return abp.timing.localClockProvider;
     }
 
-    private static getUserConfiguration(
-        httpClient: HttpClient,
-        callback: () => void,
-    ) {
+    private static getUserConfiguration(injector: Injector, httpClient: HttpClient, callback: () => void) {
+
         let url = AppConsts.remoteServiceBaseUrl + '/AbpUserConfiguration/GetAll';
         httpClient.get(url).subscribe((response: any) => {
             let result = response.result;
 
             _.merge(abp, result);
+
+            // 权限授予
+            const permissionService = injector.get(PermissionService);
+            permissionService.extend(abp.auth);
 
             abp.clock.provider = this.getCurrentClockProvider(result.clock.provider);
 

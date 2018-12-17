@@ -27,6 +27,7 @@ import { ICONS } from './style-icons';
 
 import { AbpModule } from '@abp/abp.module';
 import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
+import { PermissionService } from '@shared/auth/permission.service';
 
 export function appInitializerFactory(injector: Injector) {
 
@@ -36,8 +37,8 @@ export function appInitializerFactory(injector: Injector) {
 
     return () => {
         return new Promise<boolean>((resolve, reject) => {
-            AppPreBootstrap.run(injector,() => {
-              
+            AppPreBootstrap.run(injector, () => {
+
                 const appSessionService: AppSessionService = injector.get(
                     AppSessionService,
                 );
@@ -101,17 +102,8 @@ function getDocumentOrigin() {
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
         { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: appInitializerFactory,
-            deps: [Injector, PlatformLocation],
-            multi: true
-        },
-        {
-            provide: LOCALE_ID,
-            useFactory: getCurrentLanguage,
-        },
-        TitleService,
+        { provide: APP_INITIALIZER, useFactory: appInitializerFactory, deps: [Injector, PlatformLocation], multi: true },
+        { provide: LOCALE_ID, useFactory: getCurrentLanguage, },
     ],
     bootstrap: [RootComponent],
 })

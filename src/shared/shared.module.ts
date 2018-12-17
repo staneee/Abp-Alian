@@ -32,6 +32,7 @@ import { AlainThemeModule, ModalHelper } from '@delon/theme';
 
 import { EqualValidator } from './utils/validation/index';
 import { DelonChartModule } from '@delon/chart';
+import { PermissionService } from './auth/permission.service';
 const PIPES = [EqualValidator];
 
 @NgModule({
@@ -67,6 +68,7 @@ const PIPES = [EqualValidator];
   ],
   providers: [
     ModalHelper,
+    PermissionService
     // { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
   ],
 })

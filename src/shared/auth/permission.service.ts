@@ -72,12 +72,21 @@ export class PermissionService {
         }
     }
 
+    /**
+     * 清空所有权限
+     */
+    clear() {
+        let tmppermissionNames: any = this.aclService.data.abilities;
+        this.removePermission(tmppermissionNames);
+    }
+
 
     /**
   * 填充数据
   * @param auth 
   */
     extend(auth) {
+        debugger
         let permissions: string[] = [];
         for (let permission in auth.grantedPermissions) {
             permissions.push(permission);
